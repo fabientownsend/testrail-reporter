@@ -2,36 +2,66 @@
 
 import test from 'ava';
 import {TestRail} from '../sender';
+import {TEST_RESULT} from '../test-result';
 
 class FakeTestRailApi {
   sendResults(result) {
-    this.result = result
+    this.result = result;
   }
 
   getResults() {
-    return this.result
+    return this.result;
   }
 }
 
 test('add one successful test result', t => {
-  const testId = 1324
-  const ftr = new FakeTestRailApi()
-  const tr = new TestRail(ftr)
+  const testId = 1324;
+  const ftr = new FakeTestRailApi();
+  const tr = new TestRail(ftr);
 
-  tr.addSuccess(1234)
-  tr.sendResults()
+  tr.addSuccess(1234);
+  tr.sendResults();
 
-  t.deepEqual(ftr.getResults(), [1234])
+  t.deepEqual(ftr.getResults(), [{id: 1234, result: TEST_RESULT.PASSED}]);
 });
 
 test('adds two successful tests result', t => {
-  const testId = 1324
-  const ftr = new FakeTestRailApi()
-  const tr = new TestRail(ftr)
+  const testId = 1324;
+  const ftr = new FakeTestRailApi();
+  const tr = new TestRail(ftr);
 
-  tr.addSuccess(1234)
-  tr.addSuccess(5678)
-  tr.sendResults()
+  tr.addSuccess(1234);
+  tr.addSuccess(5678);
+  tr.sendResults();
 
-  t.deepEqual(ftr.getResults(), [1234, 5678])
+  t.deepEqual(ftr.getResults(), [
+    {id: 1234, result: TEST_RESULT.PASSED},
+    {id: 5678, result: TEST_RESULT.PASSED},
+  ]);
+});
+
+test('adds failing tests result', t => {
+  const testId = 1324;
+  const ftr = new FakeTestRailApi();
+  const tr = new TestRail(ftr);
+
+  tr.addFailure(1234);
+  tr.sendResults();
+
+  t.deepEqual(ftr.getResults(), [{id: 1234, result: TEST_RESULT.FAIL}]);
+});
+
+test('reccords failing and successful test', t => {
+  const testId = 1324;
+  const ftr = new FakeTestRailApi();
+  const tr = new TestRail(ftr);
+
+  tr.addFailure(1234);
+  tr.addSuccess(1234);
+  tr.sendResults();
+
+  t.deepEqual(ftr.getResults(), [
+    {id: 1234, result: TEST_RESULT.FAIL},
+    {id: 1234, result: TEST_RESULT.PASSED},
+  ]);
 });

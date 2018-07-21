@@ -1,5 +1,7 @@
 'use strict'
 
+const {TEST_RESULT} = require('./test-result')
+
 class TestRail {
   constructor(testRailApi) {
     this.testRailApi = testRailApi
@@ -7,10 +9,12 @@ class TestRail {
   }
 
   addSuccess(testId) {
-    this.results.push(testId)
+    this.results.push({id: testId, result: TEST_RESULT.PASSED})
   }
 
-  addFailure(testId) {}
+  addFailure(testId) {
+    this.results.push({id: testId, result: TEST_RESULT.FAIL})
+  }
 
   sendResults() {
     this.testRailApi.sendResults(this.results)
