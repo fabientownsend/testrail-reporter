@@ -21,9 +21,4 @@ class TestRail {
   }
 }
 
-class TestRailApi {
-  constructor(testSuite, destination, login, password) {}
-  sendResults(results) {}
-}
-
 module.exports.TestRail = TestRail
