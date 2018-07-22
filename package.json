@@ -4,11 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "babel src -d lib",
+    "prepublish": "npm run build",
     "test": "ava"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ]
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ava": "1.0.0-beta.6"
+    "ava": "1.0.0-beta.6",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0"
   }
 }
