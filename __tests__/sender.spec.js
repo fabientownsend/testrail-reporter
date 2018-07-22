@@ -1,8 +1,8 @@
 'use strict';
 
 import test from 'ava';
-import {TestRail} from '../sender';
-import {TEST_RESULT} from '../test-result';
+import {TestRail} from '../src/sender';
+import {TEST_RESULT} from '../src/test-result';
 
 class FakeTestRailApi {
   sendResults(result) {

@@ -1,7 +1,7 @@
 'use strict';
 
 import test from 'ava';
-import {extractTestrailId} from '../extractor';
+import {extractTestrailId} from '../src/extractor';
 
 test('extracts testrail id from testrail tag', t => {
   t.is(extractTestrailId('asdf [TestRailId: 1234] fdas'), 1234);

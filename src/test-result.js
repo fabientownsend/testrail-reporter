@@ -1,3 +1,5 @@
+'use strict';
+
 const TEST_RESULT = {
   PASSED: 1,
   BLOCKED: 2,

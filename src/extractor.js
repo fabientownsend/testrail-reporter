@@ -1,12 +1,14 @@
+'use strict';
+
 function extractTestrailId(testDescription) {
   const testRailRegex = /(?!\[TestRailId:\s)(\d+)(?=\])/;
-  const testrailId = testRailRegex.exec(testDescription)
+  const testrailId = testRailRegex.exec(testDescription);
 
   if (testrailId) {
     return parseInt(testrailId[0]);
   } else {
-    return null
+    return null;
   }
 }
 
-module.exports.extractTestrailId = extractTestrailId
+module.exports.extractTestrailId = extractTestrailId;
