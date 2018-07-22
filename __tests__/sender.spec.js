@@ -25,6 +25,19 @@ test('add one successful test result', t => {
   t.deepEqual(ftr.getResults(), [{id: 1234, result: TEST_RESULT.PASSED}]);
 });
 
+test('does not add test if no id founds', t => {
+  const ftr = new FakeTestRailApi();
+  const tr = new TestRail(ftr);
+
+  tr.addSuccess(null);
+  tr.addSuccess(undefined);
+  tr.addFailure(null);
+  tr.addFailure(undefined);
+  tr.sendResults();
+
+  t.deepEqual(ftr.getResults(), []);
+});
+
 test('adds two successful tests result', t => {
   const testId = 1324;
   const ftr = new FakeTestRailApi();
