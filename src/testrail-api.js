@@ -1,7 +1,9 @@
 'use strict';
 
 class TestRailApi {
-  constructor(testSuite, destination, login, password) {}
-  sendResults(results) {}
+  static sendResults(destination, results) {
+  }
 }
+
+module.exports.TestRailApi = TestRailApi;
 

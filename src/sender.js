@@ -20,8 +20,12 @@ class TestRail {
     }
   }
 
-  sendResults() {
-    this.testRailApi.sendResults(this.results);
+  sendResults(destination) {
+    this.testRailApi.sendResults(destination, this.results);
+  }
+
+  reset() {
+    this.results = []
   }
 }
 
